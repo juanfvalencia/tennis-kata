@@ -15,11 +15,10 @@ public class TennisGame3 implements TennisGame {
         String s;
         if (scoreIsLowerThan4()) {
             return lowerThan4();
-        } else {
-            if (scorePlayer1 == scorePlayer2)
-                return "Deuce";
-            s = scorePlayer1 > scorePlayer2 ? player1Name : player2Name;
-            return ((scorePlayer1 - scorePlayer2)*(scorePlayer1 - scorePlayer2) == 1) ? "Advantage " + s : "Win for " + s;
+        }  else if (scorePlayer1 == scorePlayer2)
+            return "Deuce";
+        else{
+            return greaterThan4();
         }
     }
 
@@ -48,6 +47,17 @@ public class TennisGame3 implements TennisGame {
 
     private boolean bothScoreLowerThan4() {
         return scorePlayer1 < 4 && scorePlayer2 < 4;
+    }
+    private String playerName() {
+        return  scorePlayer1 > scorePlayer2 ? player1Name : player2Name;
+    }
+
+    private String greaterThan4() {
+        return scoreAdvantageOrWin() ? "Advantage " + playerName() : "Win for " + playerName();
+    }
+
+    private boolean scoreAdvantageOrWin() {
+        return (scorePlayer1 - scorePlayer2)*(scorePlayer1 - scorePlayer2) == 1;
     }
 
 }
