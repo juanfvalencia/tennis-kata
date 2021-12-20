@@ -3,8 +3,9 @@ public class TennisGame1 implements TennisGame {
     
     private int scorePlayer1 = 0;
     private int scorePlayer2 = 0;
-    private String player1Name;
-    private String player2Name;
+    private final String player1Name;
+    private final String player2Name;
+
 
     public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -12,7 +13,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName.equals("player1"))
+        if (playerName.equals(this.player1Name))
             scorePlayer1 += 1;
         else
             scorePlayer2 += 1;
@@ -23,22 +24,7 @@ public class TennisGame1 implements TennisGame {
         int tempScore = 0;
         if (scorePlayer1 == scorePlayer2)
         {
-            switch (scorePlayer1)
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
-                
-            }
+            score = equalsScoreString();
         }
         else if (scorePlayer1>=4 || scorePlayer2>=4)
         {
@@ -70,6 +56,26 @@ public class TennisGame1 implements TennisGame {
                         break;
                 }
             }
+        }
+        return score;
+    }
+    private String equalsScoreString() {
+        String score;
+        switch (scorePlayer1)
+        {
+            case 0:
+                score = "Love-All";
+                break;
+            case 1:
+                score = "Fifteen-All";
+                break;
+            case 2:
+                score = "Thirty-All";
+                break;
+            default:
+                score = "Deuce";
+                break;
+
         }
         return score;
     }
